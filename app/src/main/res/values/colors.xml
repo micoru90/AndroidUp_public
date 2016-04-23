@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryBackground">@color/md_green_500</color>
+    <color name="colorSecondaryBackground">@color/md_green_700</color>
+    <color name="colorBackground">@color/md_white_1000</color>
+
+    <color name="colorBackgroundAccent">@color/md_blue_600</color>
+
+    <color name="textPrimaryColor">@color/md_black_1000</color>
+    <color name="textSecondaryColor">@color/md_green_800</color>
+
+    <color name="buttonTextColor">@color/md_white_1000</color>
+    <color name="buttonGradientStartColor">@color/md_green_300</color>
+    <color name="buttonGradientCenterColor">@color/md_green_500</color>
+    <color name="buttonGradientEndColor">@color/md_green_800</color>
+
+
+
+</resources>
