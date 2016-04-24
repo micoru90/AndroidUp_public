@@ -10,11 +10,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.miyu.androidup.R;
+import com.miyu.androidup.fragments.GlosarioFragment;
+import com.miyu.androidup.fragments.HomeFragment;
+import com.miyu.androidup.fragments.LoginFragment;
+import com.miyu.androidup.fragments.PerfilFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +32,84 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         displayView(R.id.nav_home);
+
+        View headerview = navigationView.getHeaderView(0);
+        LinearLayout header = (LinearLayout) headerview.findViewById(R.id.header);
+
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new PerfilFragment();
+                String title = getString(R.string.app_name);
+                title  = "Sign in";
+
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_relative, fragment);
+                    ft.commit();
+                }
+
+                // set the toolbar title
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(title);
+                }
+
+                drawer.closeDrawer(GravityCompat.START);
+                setCheckedAndChekacle(R.id.nav_home, false);
+                setCheckedAndChekacle(R.id.nav_perfil, false);
+                setCheckedAndChekacle(R.id.nav_glosario, false);
+                setCheckedAndChekacle(R.id.nav_ajustes, false);
+                setCheckedAndChekacle(R.id.nav_contacto, false);
+                setCheckedAndChekacle(R.id.nav_comparte, false);
+                setCheckedAndChekacle(R.id.nav_valora, false);
+            }
+        });
+
+        Button signinButton = (Button) headerview.findViewById(R.id.signin);
+        signinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new LoginFragment();
+                String title = getString(R.string.app_name);
+                title  = "Sign in";
+
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_relative, fragment);
+                    ft.commit();
+                }
+
+                // set the toolbar title
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(title);
+                }
+
+                drawer.closeDrawer(GravityCompat.START);
+                setCheckedAndChekacle(R.id.nav_home, false);
+                setCheckedAndChekacle(R.id.nav_perfil, false);
+                setCheckedAndChekacle(R.id.nav_glosario, false);
+                setCheckedAndChekacle(R.id.nav_ajustes, false);
+                setCheckedAndChekacle(R.id.nav_contacto, false);
+                setCheckedAndChekacle(R.id.nav_comparte, false);
+                setCheckedAndChekacle(R.id.nav_valora, false);
+            }
+        });
+
+    }
+
+    private void setCheckedAndChekacle(int nav, boolean check) {
+        navigationView.getMenu().findItem(nav).setChecked(check);
+        navigationView.getMenu().findItem(nav).setCheckable(check);
     }
 
     @Override
@@ -44,52 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_comparte) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
         displayView(item.getItemId());
         return true;
     }
@@ -100,18 +135,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String title = getString(R.string.app_name);
 
         switch (viewId) {
+
             case R.id.nav_home:
                 fragment = new HomeFragment();
                 title  = "AndroidUp";
-
+                setCheckedAndChekacle(R.id.nav_home, true);
                 break;
+
             case R.id.nav_perfil:
                 fragment = new PerfilFragment();
                 title  = "Perfil";
-
+                setCheckedAndChekacle(R.id.nav_perfil, true);
                 break;
+
             case R.id.nav_glosario:
                 fragment = new GlosarioFragment();
+                setCheckedAndChekacle(R.id.nav_glosario, true);
                 title = "Glosario";
                 break;
 

@@ -1,4 +1,4 @@
-package com.miyu.androidup.activities;
+package com.miyu.androidup.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import com.miyu.androidup.R;
 
 /**
- * Created by Mireia on 19/04/2016.
+ * Created by Mireia on 22/04/2016.
  */
-public class PerfilFragment extends Fragment {
+public class GlosarioFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.perfil_fragment,container,false);
+        View v = inflater.inflate(R.layout.glosario_fragment,container,false);
         return v;
     }
 }
