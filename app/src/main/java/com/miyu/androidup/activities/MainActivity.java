@@ -1,8 +1,10 @@
 package com.miyu.androidup.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.miyu.androidup.R;
 import com.miyu.androidup.fragments.GlosarioFragment;
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private de.hdodenhof.circleimageview.CircleImageView profile_image;
+    private TextView profile_name;
+    private TextView profile_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +52,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View headerview = navigationView.getHeaderView(0);
         LinearLayout header = (LinearLayout) headerview.findViewById(R.id.header);
 
+        profile_image = (de.hdodenhof.circleimageview.CircleImageView) headerview.findViewById(R.id.profile_image);
+        profile_name = (TextView) headerview.findViewById(R.id.profile_name);
+        profile_email = (TextView) headerview.findViewById(R.id.profile_email);
+
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new PerfilFragment();
                 String title = getString(R.string.app_name);
-                title  = "Sign in";
+                title  = "Perfil";
 
                 if (fragment != null) {
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -75,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        Button signinButton = (Button) headerview.findViewById(R.id.signin);
+        final Button signinButton = (Button) headerview.findViewById(R.id.sign);
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,9 +94,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 title  = "Sign in";
 
                 if (fragment != null) {
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_relative, fragment);
-                    ft.commit();
+//                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.content_relative, fragment);
+//                    ft.commit();
+
+                    fragment = new LoginFragment();
+
+                    FragmentManager manager = getSupportFragmentManager();
+
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.content_relative, fragment);
+                    transaction.commit();
                 }
 
                 // set the toolbar title
@@ -102,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setCheckedAndChekacle(R.id.nav_contacto, false);
                 setCheckedAndChekacle(R.id.nav_comparte, false);
                 setCheckedAndChekacle(R.id.nav_valora, false);
+
+
             }
         });
 
@@ -170,6 +190,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == LoginFragment.RC_SIGN_IN) {
+            LoginFragment fragment = (LoginFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.content_relative);
+
+            String[] profile_information = fragment.getProfileInformation();
+
+            String stringURL = profile_information[0];
+
+            profile_name.setText(profile_information[1]);
+            profile_email.setText(profile_information[2]);
+
+            fragment.onActivityResult(requestCode, resultCode, data);
+
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }

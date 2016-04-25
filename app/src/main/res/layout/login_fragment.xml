@@ -6,15 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signin_google_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN IN"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimaryBackground"
-        android:textSize="28sp"
-        android:id="@+id/textView"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
+
+
 </RelativeLayout>
