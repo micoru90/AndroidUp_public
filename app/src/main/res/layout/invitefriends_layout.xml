@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="fill_parent"
+        android:hint="Type your WhatsApp message here ...."
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFFEF"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:layout_height="200dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="sendMessae"
+        android:layout_marginBottom="21dp"
+        android:text="Send to WhatsApp" />
+
+</RelativeLayout>

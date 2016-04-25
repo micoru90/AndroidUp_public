@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.miyu.androidup.R;
 import com.miyu.androidup.fragments.GlosarioFragment;
 import com.miyu.androidup.fragments.HomeFragment;
+import com.miyu.androidup.fragments.InviteFriendsFragment;
 import com.miyu.androidup.fragments.LoginFragment;
 import com.miyu.androidup.fragments.PerfilFragment;
 
@@ -172,6 +173,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new GlosarioFragment();
                 setCheckedAndChekacle(R.id.nav_glosario, true);
                 title = "Glosario";
+                break;
+
+            case R.id.nav_comparte:
+                fragment = new InviteFriendsFragment();
+                setCheckedAndChekacle(R.id.nav_comparte, true);
+                title = "Comparte";
                 break;
 
         }
