@@ -15,14 +15,14 @@ import com.miyu.androidup.R;
 /**
  * Created by Mireia on 25/04/2016.
  */
-public class InviteFriendsFragment extends Fragment {
+public class CompartirFragment extends Fragment {
 
     private EditText message;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.invitefriends_layout,container,false);
+        View v = inflater.inflate(R.layout.compartir_layout,container,false);
 
         message = (EditText) v.findViewById(R.id.message);
         Button button = (Button) v.findViewById(R.id.button);

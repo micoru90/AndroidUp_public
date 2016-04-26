@@ -22,10 +22,10 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:onClick="sendMessae"
-        android:layout_marginBottom="21dp"
-        android:text="Send to WhatsApp" />
+        android:text="Send to WhatsApp"
+        android:layout_below="@+id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"/>
 
 </RelativeLayout>
