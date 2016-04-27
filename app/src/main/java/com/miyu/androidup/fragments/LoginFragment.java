@@ -210,7 +210,7 @@ public class LoginFragment extends Fragment
     /**
      * Fetching user's information name, email, profile pic
      * */
-    public String[] getProfileInformation() {
+    private void getProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
@@ -225,12 +225,6 @@ public class LoginFragment extends Fragment
                         + ", Image: " + personPhotoUrl + " user id:"
                         + currentPerson.getId());
 
-                String[] ret = new String[3];
-                ret[0] = personPhotoUrl;
-                ret[1] = personName;
-                ret[2] = email;
-
-                return ret;
             } else {
                 Toast.makeText(mContext, "Person information is null",
                         Toast.LENGTH_LONG).show();
@@ -238,22 +232,20 @@ public class LoginFragment extends Fragment
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-       return null;
     }
 
     /**
      * Sign-out from google
      * */
-    private void signOutFromGplus() {
-        if (mGoogleApiClient.isConnected()) {
-            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
-            mGoogleApiClient.connect();
-
-            updateUI(false);
-
-        }
-    }
+//    private void signOutFromGplus() {
+//        if (mGoogleApiClient.isConnected()) {
+//            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+//            mGoogleApiClient.disconnect();
+//            mGoogleApiClient.connect();
+//
+//            updateUI(false);
+//
+//        }
+//    }
 
 }

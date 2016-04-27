@@ -205,14 +205,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == LoginFragment.RC_SIGN_IN) {
             LoginFragment fragment = (LoginFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.content_relative);
-
-            String[] profile_information = fragment.getProfileInformation();
-
-            String stringURL = profile_information[0];
-
-            profile_name.setText(profile_information[1]);
-            profile_email.setText(profile_information[2]);
-
             fragment.onActivityResult(requestCode, resultCode, data);
 
         } else {
